@@ -394,13 +394,15 @@ const internalCaptureWebsite = async (input, options) => {
 		}
 
 		const buffer = await page.screenshot(screenshotOptions);
-	}  finally {
-		if(page) await page.close();
+		return buffer;
+	} finally {
+		if(page) {
+			await page.close();
+		}
 		if (!options._keepAlive && browser) {
 			await browser.close();
 		}
 	}
-	return buffer;
 };
 
 const captureWebsite = {};
